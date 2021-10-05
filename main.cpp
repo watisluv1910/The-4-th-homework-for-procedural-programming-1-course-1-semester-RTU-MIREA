@@ -9,6 +9,7 @@
 //#include <windows.h> // for f4
 //#include <conio.h> // for f4
 #include <iomanip> // for f4 setw
+#include <vector> // for f9 vector
 
 using namespace std;
 
@@ -297,7 +298,47 @@ void f8() {
 }
 
 void f9() {
-
+	string number, number_end;
+	int ss1, ss2, number_int = 0;
+	cout << "¬ведите число:\n";
+	cin >> number;
+	cout << "¬ведите изначальную систему счислени€:\n";
+	ss1 = err_check_int();
+	cout << "¬ведите конечную систему счислени€:\n";
+	ss2 = err_check_int();
+	vector <char> alphabet; // inicialization of not-fixed len vector
+	for (size_t i = 65; i < 65 + 26; i++) 
+	{
+		alphabet.push_back((char)i); // appending letter to the end of vector
+	}
+	for (int i = number.length()-1; i >= 0; i--) // reversed iteration
+	{
+		char rank_s = number[i]; 
+		if (/*find(alphabet.begin(), alphabet.end(), rank_s) == alphabet.end()*/ static_cast<int>(rank_s) >= 65) // if char is letter  ?? reworking alphabet
+		{
+			number_int += (static_cast<int>(rank_s) - 55) * pow(ss1, (number.length() - 1 - i));
+		}
+		else // if char is number
+		{
+			number_int += (static_cast<int>(rank_s) - 48) * pow(ss1, (number.length() - 1 - i));
+		}
+	}
+	cout << endl << number << endl;
+	cout << endl << number_int << endl;
+	while (number_int > 0)
+	{
+		if (number_int % ss2 >= 10)
+		{
+			char rank_ch = (char)((number_int % ss2) + 55);
+			number_end = rank_ch + number_end;
+		}
+		else
+		{
+			number_end = to_string(number_int % ss2) + number_end;
+		}
+		number_int /= ss2;
+	}
+	cout << endl << number_end << endl;
 }
 
 int main() {
