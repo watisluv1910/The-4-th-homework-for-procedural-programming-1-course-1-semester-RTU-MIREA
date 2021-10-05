@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#define _USE_MATH_DEFINES
 #include <math.h>
 #include <stdio.h> // printf
 #include <fstream> // for working with file
@@ -52,21 +53,6 @@ int err_check_int_for_negative() { // function that check type error
 	return temp_var;
 }
 
-int sign_definition(int a) { // for f2
-	if (a > 0)
-	{
-		return 1;
-	}
-	else if (a == 0)
-	{
-		return 0;
-	}
-	else
-	{
-		return -1;
-	}
-}
-
 void f1() {
 	ofstream fout; // output file stream (writing)
 	string path = "text_file_f1.txt"; // path to the file
@@ -106,14 +92,66 @@ void f1() {
 	fin.close(); // closing file
 }
 
+int sign_definition(int a) { // for f2
+	if (a > 0)
+	{
+		return 1;
+	}
+	else if (a == 0)
+	{
+		return 0;
+	}
+	else
+	{
+		return -1;
+	}
+}
+
 void f2() {
 	cout << "Введите число, знак которого нужно определить:" << endl;
 	int x = err_check_int_for_negative();
 	cout << "Знак введёного числа соответствует числу " << sign_definition(x) << " в предоставленной системе." << endl;
 }
 
-void f3() {
+double S_rectangle(double a, double b) { // for f3
+	return a * b;
+}
 
+double S_triangle(double h, double x) { // for f3
+	return h * x / 2;
+}
+
+double S_round(double r) { // for f3
+	return M_PI * pow(r, 2);
+}
+
+void f3() {
+	cout << "Введите:\n1, если хотите посчитать S прямоугольника.\n2, если хотите посчитать S треугольника.\n3, если хотите посчитать S круга.\nВведённое значение:\n";
+	int chose = err_check_int(); // choosing figure
+	if (chose == 1)
+	{
+		cout << "Введите значения сторон прямоугольника:\n";
+		double a = err_check();
+		double b = err_check();
+		cout << "S прямоугольника = " << S_rectangle(a, b) << "." << endl;
+	}
+	else if (chose == 2)
+	{
+		cout << "Введите значения длин основания и проведённой к нему высоты:\n";
+		double h = err_check();
+		double x = err_check();
+		cout << "S треугольника = " << S_triangle(h, x) << "." << endl;
+	}
+	else if (chose == 3)
+	{
+		cout << "Введите значение радиуса круга:\n";
+		double r = err_check();
+		cout << "S круга = " << S_round(r) << "." << endl;
+	}
+	else
+	{
+		cout << "Количество данных фигур не превышает 3.\n";
+	}
 }
 
 void f4() {
