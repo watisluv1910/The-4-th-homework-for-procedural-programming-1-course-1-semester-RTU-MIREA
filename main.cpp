@@ -6,6 +6,9 @@
 #include <fstream> // for working with file
 #include <stdlib.h> // for rand, srand
 #include <time.h> // for time
+//#include <windows.h> // for f4
+//#include <conio.h> // for f4
+#include <iomanip> // for f4 setw
 
 using namespace std;
 
@@ -155,7 +158,122 @@ void f3() {
 }
 
 void f4() {
+	//realisation 1:
+	//POINT op;
+	//HWND hWnd = GetConsoleWindow(); //Получаем дескриптор окна консоли
+	//HDC hDC = GetDC(hWnd); //Получаем контекст устройства по полученному дескриптору
+	//SelectObject(hDC, GetStockObject(WHITE_PEN)); //Выбираем перо WHITE_PEN в контекст
 
+	//MoveToEx(hDC, 50, 50, &op); //Ставим текущую точку в координаты 50,50
+	//LineTo(hDC, 100, 200); //Рисуем линию из текущей точки в точку 100, 200
+
+	//ReleaseDC(hWnd, hDC); //"Освобождаем" контекст
+	//std::cin.get();
+	//return 0;
+	
+	//realisation 2:
+	/*bool a = true;
+	int num;
+	string text = "'Былая слава' - 1912 г.'";
+
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	while (a == true) {
+		cout << "Печать 'Былой славы'. Для отрисовки нажмите любую клавишу, для выхода - ESC." << endl;
+		num = _getch();
+
+		if (num == 27) {
+			exit(0);
+		}
+
+		else {
+
+			system("cls");
+
+			cout << endl;
+
+			for (int z = 0; z < text.length(); z++) {
+				Sleep(100);
+				cout << text[z];
+			}
+			cout << endl << endl;
+			for (int j = 0; j < 8; j++) {
+				Sleep(100);
+				cout << "-" << " ";
+			}
+			for (int j = 0; j < 15; j++) {
+				Sleep(100);
+				cout << (char)127;
+			}
+			cout << endl;
+			for (int i = 1; i <= 48; i++) {
+				Sleep(100);
+				cout << "*" << " ";
+				if (i % 8 == 0) {
+					if (i == 16 || i == 32 || i == 48) {
+						for (int j = 0; j < 15; j++) {
+							Sleep(100);
+							cout << (char)127;
+						}
+					}
+					cout << endl;
+				}
+
+			}
+			for (int q = 0; q < 3; q++) {
+				Sleep(100);
+				cout << endl;
+				for (int j = 0; j <= 30; j++) {
+					Sleep(100);
+					cout << (char)127;
+				}
+				cout << endl;
+			}
+		}
+		cout << endl << endl << endl;
+		cout << "Для повторного запуска программы нажми любую клавишу, для выхода - ESC:";
+		num = _getch();
+		if (num == 27) {
+			exit(0);
+		}
+		else {
+			system("cls");
+			continue;
+		}
+
+	}*/
+	
+	//realisation 3:
+	for (int i = 0; i < 13; ++i)
+	{
+		if (i < 6) {
+			if (0 == i % 2) {
+				for (int j = 0; j < 8; ++j)
+				{
+					cout << "  *";
+				}
+				cout.width(60);
+				cout << setw(60) << setfill('/');
+			}
+			else {
+				cout << " ";
+				for (int j = 0; j < 8; ++j)
+					cout << "*  ";
+			}
+			cout << '\n';
+		}
+
+	}
+	for (int i = 1; i < 8; ++i)
+		if (0 == i % 2)
+		{
+			cout << setw(84) << setfill(' ') << '\n';
+		}
+		else
+		{
+			cout << setw(84) << setfill('/') << '\n';
+		}
 }
 
 void f5() {
