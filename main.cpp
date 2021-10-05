@@ -1,7 +1,10 @@
 #include <iostream>
 #include <string>
 #include <math.h>
-#include <stdio.h>
+#include <stdio.h> // printf
+#include <fstream> // for working with file
+#include <stdlib.h> // for rand, srand
+#include <time.h> // for time
 
 using namespace std;
 
@@ -39,7 +42,42 @@ int err_check_int() { // function that check type error
 }
 
 void f1() {
-
+	ofstream fout; // output file stream (writing)
+	string path = "text_file_f1.txt"; // path to the file
+	fout.open(path); 
+	if (!fout.is_open()) // chacking for the successful
+	{
+		cout << "Ошибка открытия файла." << endl;
+	}
+	else
+	{	
+		srand(time(NULL)); // randomizing depends on time
+		for (size_t i = 0; i < 10; i++)
+		{
+			fout << rand() % 100 << endl;
+		}
+	}
+	fout.close(); // closing file 
+	ifstream fin; // input file stream (reading)
+	fin.open(path);
+	if (!fin.is_open()) // chacking for the successful
+	{
+		cout << "Ошибка открытия файла." << endl;
+	}
+	else
+	{
+		int sum = 0;
+		cout << "Записанные в файл элементы: " << endl;
+		while (!fin.eof()) // true while not end of file
+		{	
+			int var = 0;
+			fin >> var;
+			cout << var << endl;
+			sum += var;
+		}
+		cout << "Сумма записанных в файл чисел равна: " << sum << endl;
+	}
+	fin.close(); // closing file
 }
 
 void f2() {
@@ -69,7 +107,7 @@ int main() {
 		switch (counter)
 		{
 		case 1:
-			//f1();
+			f1();
 			break;
 		case 2:
 			//f2();
