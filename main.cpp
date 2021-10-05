@@ -41,6 +41,32 @@ int err_check_int() { // function that check type error
 	return temp_var;
 }
 
+int err_check_int_for_negative() { // function that check type error
+	int temp_var; // inicialization of temporary variable 
+	while (!(cin >> temp_var))
+	{
+		cout << "Ошибка ввода.\nВведите значение заново:\n";
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n'); // operator >> will no longer fetch data from the stream as it is in the wrong format
+	}
+	return temp_var;
+}
+
+int sign_definition(int a) { // for f2
+	if (a > 0)
+	{
+		return 1;
+	}
+	else if (a == 0)
+	{
+		return 0;
+	}
+	else
+	{
+		return -1;
+	}
+}
+
 void f1() {
 	ofstream fout; // output file stream (writing)
 	string path = "text_file_f1.txt"; // path to the file
@@ -81,7 +107,9 @@ void f1() {
 }
 
 void f2() {
-
+	cout << "Введите число, знак которого нужно определить:" << endl;
+	int x = err_check_int_for_negative();
+	cout << "Знак введёного числа соответствует числу " << sign_definition(x) << " в предоставленной системе." << endl;
 }
 
 void f3() {
@@ -99,7 +127,7 @@ void f5() {
 int main() {
 	int counter;
 	setlocale(LC_ALL, "Russian");
-	cout << "Номер задачи не превышает 2.\n" << "Чтобы закончить работу, введите 0.\n";
+	cout << "Номер задачи не превышает 5.\n" << "Чтобы закончить работу, введите 0.\n";
 	cout << "Введите номер задачи: \n";
 	counter = err_check_int();
 	while (counter > 0)
@@ -110,19 +138,19 @@ int main() {
 			f1();
 			break;
 		case 2:
-			//f2();
+			f2();
 			break;
 		case 3:
-			//f3();
+			f3();
 			break;
 		case 4:
-			//f4();
+			f4();
 			break;
 		case 5:
-			//f5();
+			f5();
 			break;
 		default:
-			cout << "Номер задачи не превышает 2.\n" << "Чтобы закончить работу, введите 0.\n";
+			cout << "Номер задачи не превышает 5.\n" << "Чтобы закончить работу, введите 0.\n";
 			break;
 		}
 		cout << "Введите номер следующей задачи: \n";
