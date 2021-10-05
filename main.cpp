@@ -67,9 +67,11 @@ void f1() {
 	else
 	{	
 		srand(time(NULL)); // randomizing depends on time
+		float variable;
 		for (size_t i = 0; i < 10; i++)
 		{
-			fout << rand() % 100 << endl;
+			variable = (rand() % 100 - 50) / 10.0;
+			fout << variable << endl;
 		}
 	}
 	fout.close(); // closing file 
@@ -81,16 +83,16 @@ void f1() {
 	}
 	else
 	{
-		int sum = 0;
+		float sum = 0;
 		cout << "Записанные в файл элементы: " << endl;
 		while (!fin.eof()) // true while not end of file
 		{	
-			int var = 0;
+			float var;
 			fin >> var;
 			cout << var << endl;
 			sum += var;
 		}
-		cout << "Сумма записанных в файл чисел равна: " << sum << endl;
+		cout << "Сумма записанных в файл чисел равна: " << sum << "." << endl;
 	}
 	fin.close(); // closing file
 }
@@ -266,6 +268,7 @@ void f4() {
 
 	}
 	for (int i = 1; i < 8; ++i)
+	{
 		if (0 == i % 2)
 		{
 			cout << setw(84) << setfill(' ') << '\n';
@@ -274,6 +277,7 @@ void f4() {
 		{
 			cout << setw(84) << setfill('/') << '\n';
 		}
+	}
 }
 
 void f5() {
