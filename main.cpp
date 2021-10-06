@@ -311,10 +311,10 @@ void f9() {
 	{
 		alphabet.push_back((char)i); // appending letter to the end of vector
 	}
-	for (int i = number.length()-1; i >= 0; i--) // reversed iteration
+	for (int i = number.length()-1; i >= 0; i--) // reversed iteration for transfer to decimal sys
 	{
 		char rank_s = number[i]; 
-		if (/*find(alphabet.begin(), alphabet.end(), rank_s) == alphabet.end()*/ static_cast<int>(rank_s) >= 65) // if char is letter  ?? reworking alphabet
+		if (find(alphabet.begin(), alphabet.end(), rank_s) != alphabet.end()) // if char is letter 
 		{
 			number_int += (static_cast<int>(rank_s) - 55) * pow(ss1, (number.length() - 1 - i));
 		}
@@ -323,11 +323,9 @@ void f9() {
 			number_int += (static_cast<int>(rank_s) - 48) * pow(ss1, (number.length() - 1 - i));
 		}
 	}
-	cout << endl << number << endl;
-	cout << endl << number_int << endl;
-	while (number_int > 0)
+	while (number_int > 0) // transfer to ss2
 	{
-		if (number_int % ss2 >= 10)
+		if (number_int % ss2 >= 10) // transfer number to letter
 		{
 			char rank_ch = (char)((number_int % ss2) + 55);
 			number_end = rank_ch + number_end;
@@ -336,9 +334,9 @@ void f9() {
 		{
 			number_end = to_string(number_int % ss2) + number_end;
 		}
-		number_int /= ss2;
+		number_int /= ss2; // <= rank
 	}
-	cout << endl << number_end << endl;
+	cout << "Итоговый результат: " << number_end << "." << endl;
 }
 
 int main() {
