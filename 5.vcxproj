@@ -142,7 +142,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="f4_2.cpp" />
     <ClCompile Include="f4_1.cpp" />
-    <ClCompile Include="f5_1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />

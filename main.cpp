@@ -195,7 +195,7 @@ void f4() {
 }
 
 void f5() {
-	int 
+	system("\"D:/Microsoft VS source/C++/Home Tasks/1 курс/ДЗ №5 на 6ю неделю/Task 5 (graph)/Debug/Task 5 (graph).exe\"");
 }
 
 void f6() {
