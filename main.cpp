@@ -12,7 +12,7 @@
 
 using namespace std;
 
-double inizializeDouble() { // function that check type error
+double inicializeNotNegativeDouble() { // function that check type error
 	double temp_var; // inicialization of temporary variable 
 	while (!(cin >> temp_var) || temp_var < 0)
 	{
@@ -23,7 +23,7 @@ double inizializeDouble() { // function that check type error
 	return temp_var;
 }
 
-double inicializeDoubleNegative() { // function that check type error
+double inicializeDouble() { // function that check type error
 	double temp_var; // inicialization of temporary variable 
 	while (!(cin >> temp_var))
 	{
@@ -34,7 +34,7 @@ double inicializeDoubleNegative() { // function that check type error
 	return temp_var;
 }
 
-int inizializeInteger() { // function that check type error
+int inicializeNotNegativeInteger() { // function that check type error
 	int temp_var; // inicialization of temporary variable 
 	while (!(cin >> temp_var) || temp_var < 0)
 	{
@@ -45,7 +45,7 @@ int inizializeInteger() { // function that check type error
 	return temp_var;
 }
 
-int inizializeIntegerNegative() { // function that check type error
+int inicializeInteger() { // function that check type error
 	int temp_var; // inicialization of temporary variable 
 	while (!(cin >> temp_var))
 	{
@@ -70,7 +70,7 @@ void f1() {
 		float variable;
 		for (size_t i = 0; i < 10; i++)
 		{
-			variable = (rand() % 100 - 50) / 10.0;
+			variable = (rand() % 100 - 50) / 10.0f;
 			fout << variable << endl;
 		}
 	}
@@ -114,7 +114,7 @@ int defineSign(int a) { // for f2
 
 void f2() {
 	cout << "Введите число, знак которого нужно определить:" << endl;
-	int x = inizializeIntegerNegative();
+	int x = inicializeInteger();
 	cout << "Знак введёного числа соответствует числу " << defineSign(x) << " в предоставленной системе." << endl;
 }
 
@@ -132,25 +132,25 @@ double computeSquareCircle(double r) { // for f3
 
 void f3() {
 	cout << "Введите:\n1, если хотите посчитать S прямоугольника.\n2, если хотите посчитать S треугольника.\n3, если хотите посчитать S круга.\nВведённое значение:\n";
-	int chose = inizializeInteger(); // choosing figure
+	int chose = inicializeNotNegativeInteger(); // choosing figure
 	if (chose == 1)
 	{
 		cout << "Введите значения сторон прямоугольника:\n";
-		double a = inizializeDouble();
-		double b = inizializeDouble();
+		double a = inicializeNotNegativeDouble();
+		double b = inicializeNotNegativeDouble();
 		cout << "S прямоугольника = " << computeSquareRectangle(a, b) << "." << endl;
 	}
 	else if (chose == 2)
 	{
 		cout << "Введите значения длин основания и проведённой к нему высоты:\n";
-		double h = inizializeDouble();
-		double x = inizializeDouble();
+		double h = inicializeNotNegativeDouble();
+		double x = inicializeNotNegativeDouble();
 		cout << "S треугольника = " << computeSquareTriangle(h, x) << "." << endl;
 	}
 	else if (chose == 3)
 	{
 		cout << "Введите значение радиуса круга:\n";
-		double r = inizializeDouble();
+		double r = inicializeNotNegativeDouble();
 		cout << "S круга = " << computeSquareCircle(r) << "." << endl;
 	}
 	else
@@ -202,12 +202,65 @@ void f6() {
 	
 }
 
-double generateRandomNumber() {
-
+void generatePseudoRandomNumber(int flag) {
+	int nS = 0, m, a, c;
+	if (flag == 0) {
+		cout << "Введите значение множителя m:\n";
+		m = inicializeInteger();
+		cout << "Введите значение инкремента a:\n";
+		a = inicializeInteger();
+		cout << "Введите диапазон последовательности c:\n";
+		c = inicializeInteger();
+	}
+	else if (flag == 1) {
+		m = 37;
+		cout << "Значение множителя m: " << m << ".\n";
+		a = 3;
+		cout << "Значение инкремента a: " << a << ".\n";
+		c = 64;
+		cout << "Диапазон последовательности c: " << c << ".\n";
+	}
+	else {
+		m = 25173;
+		cout << "Значение множителя m: " << m << ".\n";
+		a = 13849;
+		cout << "Значение инкремента a: " << a << ".\n";
+		c = 65537;
+		cout << "Диапазон последовательности c: " << c << ".\n";
+	}
+	cout << "Введите величину последовательности maxLen:\n";
+	int maxLen = inicializeNotNegativeInteger();
+	cout << endl;
+	for (int i = 0; i < maxLen; i++) {
+		nS = (m * nS + a) % c;
+		cout << "Псевдослучайное число: " << nS << ".\n";
+	}
+	cout << endl;
 }
 
 void f7() {
-	int choosePath = inizializeInteger();
+	cout << "Выберите:\n1, чтобы продолжить с самостоятельным вводом чисел.\n2, чтобы воспользоваться готовыми вариантами чисел.\n";
+	int choosePath = inicializeNotNegativeInteger();
+	switch (choosePath) {
+	case 1:
+		generatePseudoRandomNumber(0);
+		break;
+	case 2:
+		cout << "Выберите:\n1, чтобы продолжить с I вариантом.\n2, чтобы продолжить с II вариантом.\n";
+		choosePath = inicializeNotNegativeInteger();
+		switch (choosePath) {
+		case 1:
+			generatePseudoRandomNumber(1);
+			break;
+		case 2:
+			generatePseudoRandomNumber(2);
+			break;
+		}
+		break;
+	default:
+		cout << "Введённое число не соответствует предложенным действиям.\nПопробуйте снова.\n";
+		break;
+	}
 }
 
 void f8() {
@@ -272,9 +325,9 @@ void f9() {
 	cout << "Введите число:\n";
 	cin >> number;
 	cout << "Введите изначальную систему счисления:\n";
-	ss1 = inizializeInteger();
+	ss1 = inicializeNotNegativeInteger();
 	cout << "Введите конечную систему счисления:\n";
-	ss2 = inizializeInteger();
+	ss2 = inicializeNotNegativeInteger();
 	vector <char> alphabet; // inicialization of not-fixed len vector
 	for (size_t i = 65; i < 65 + 26; i++) 
 	{
@@ -313,7 +366,7 @@ int main() {
 	setlocale(LC_ALL, "Russian");
 	cout << "Номер задачи не превышает 9.\n" << "Чтобы закончить работу, введите 0.\n";
 	cout << "Введите номер задачи: \n";
-	chooseTask = inizializeInteger();
+	chooseTask = inicializeNotNegativeInteger();
 	while (chooseTask > 0)
 	{
 		switch (chooseTask)
@@ -350,6 +403,6 @@ int main() {
 			break;
 		}
 		cout << "Введите номер следующей задачи: \n";
-		chooseTask = inizializeInteger();;
+		chooseTask = inicializeNotNegativeInteger();;
 	}
 }
