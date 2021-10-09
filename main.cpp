@@ -202,8 +202,12 @@ void f6() {
 	
 }
 
-void f7() {
+double generateRandomNumber() {
 
+}
+
+void f7() {
+	int choosePath = inizializeInteger();
 }
 
 void f8() {
@@ -305,14 +309,14 @@ void f9() {
 }
 
 int main() {
-	int counter;
+	int chooseTask;
 	setlocale(LC_ALL, "Russian");
 	cout << "Номер задачи не превышает 9.\n" << "Чтобы закончить работу, введите 0.\n";
 	cout << "Введите номер задачи: \n";
-	counter = inizializeInteger();
-	while (counter > 0)
+	chooseTask = inizializeInteger();
+	while (chooseTask > 0)
 	{
-		switch (counter)
+		switch (chooseTask)
 		{
 		case 1:
 			f1();
@@ -346,6 +350,6 @@ int main() {
 			break;
 		}
 		cout << "Введите номер следующей задачи: \n";
-		counter = inizializeInteger();;
+		chooseTask = inizializeInteger();;
 	}
 }
