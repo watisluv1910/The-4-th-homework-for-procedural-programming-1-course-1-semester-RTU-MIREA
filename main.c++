@@ -16,9 +16,11 @@ double inicializeNotNegativeDouble() { // function that check type error
 	double temp_var; // inicialization of temporary variable 
 	while (!(cin >> temp_var) || temp_var < 0)
 	{
-		cout << "Ошибка ввода.\nВведите значение заново:\n";
+		cout << "Inicialization error.\nEnter correct value:\n";
 		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n'); // operator >> will no longer fetch data from the stream as it is in the wrong format
+		cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+		// operator >> will no longer fetch data from the stream
+		// as it is in the wrong format
 	}
 	return temp_var;
 }
@@ -27,9 +29,11 @@ double inicializeDouble() { // function that check type error
 	double temp_var; // inicialization of temporary variable 
 	while (!(cin >> temp_var))
 	{
-		cout << "Ошибка ввода.\nВведите значение заново:\n";
+		cout << "Inicialization error.\nEnter correct value:\n";
 		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n'); // operator >> will no longer fetch data from the stream as it is in the wrong format
+		cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+		// operator >> will no longer fetch data from the stream
+		// as it is in the wrong format
 	}
 	return temp_var;
 }
@@ -38,9 +42,11 @@ int inicializeNotNegativeInteger() { // function that check type error
 	int temp_var; // inicialization of temporary variable 
 	while (!(cin >> temp_var) || temp_var < 0)
 	{
-		cout << "Ошибка ввода.\nВведите значение заново:\n";
+		cout << "Inicialization error.\nEnter correct value:\n";
 		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n'); // operator >> will no longer fetch data from the stream as it is in the wrong format
+		cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+		// operator >> will no longer fetch data from the stream 
+		// as it is in the wrong format
 	}
 	return temp_var;
 }
@@ -49,20 +55,22 @@ int inicializeInteger() { // function that check type error
 	int temp_var; // inicialization of temporary variable 
 	while (!(cin >> temp_var))
 	{
-		cout << "Ошибка ввода.\nВведите значение заново:\n";
+		cout << "Inicialization error.\nEnter correct value:\n";
 		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n'); // operator >> will no longer fetch data from the stream as it is in the wrong format
+		cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+		// operator >> will no longer fetch data from the stream as 
+		// it is in the wrong format
 	}
 	return temp_var;
 }
 
-void f1() {
+void f1File() {
 	ofstream fout; // output file stream (writing)
 	string path = "text_file_f1.txt"; // path to the file
 	fout.open(path); 
 	if (!fout.is_open()) // chacking for the successful
 	{
-		cout << "Ошибка открытия файла." << endl;
+		cout << "File opening error." << endl;
 	}
 	else
 	{	
@@ -70,7 +78,7 @@ void f1() {
 		float variable;
 		for (size_t i = 0; i < 10; i++)
 		{
-			variable = (rand() % 100 - 50) / 10.0f;
+			variable = (rand() % 100 - 50) / 10.0f; // gets random float var
 			fout << variable << endl;
 		}
 	}
@@ -79,20 +87,20 @@ void f1() {
 	fin.open(path);
 	if (!fin.is_open()) // chacking for the successful
 	{
-		cout << "Ошибка открытия файла." << endl;
+		cout << "File opening error." << endl;
 	}
 	else
 	{
 		float sum = 0;
-		cout << "Записанные в файл элементы: " << endl;
+		cout << "Numbers written in the file: " << endl;
 		while (!fin.eof()) // true while not end of file
 		{	
 			float var;
-			fin >> var;
+			fin >> var; // reading numbers
 			cout << var << endl;
 			sum += var;
 		}
-		cout << "Сумма записанных в файл чисел равна: " << sum << "." << endl;
+		cout << "Sum of numbers written in the file is: " << sum << ".\n";
 	}
 	fin.close(); // closing file
 }
@@ -100,88 +108,91 @@ void f1() {
 int defineSign(int a) { // for f2
 	if (a > 0)
 	{
-		return 1;
+		return 1; // according to the task
 	}
 	else if (a == 0)
 	{
-		return 0;
+		return 0; // according to the task
 	}
 	else
 	{
-		return -1;
+		return -1; // according to the task
 	}
 }
 
-void f2() {
-	cout << "Введите число, знак которого нужно определить:" << endl;
+void f2NumberSign() {
+	cout << "Enter the number, which sign is needed to be defined:\n";
 	int x = inicializeInteger();
-	cout << "Знак введёного числа соответствует числу " << defineSign(x) << " в предоставленной системе." << endl;
+	cout << "The sign of entered number is euqal to  "
+		 << defineSign(x) << " according to the task.\n";
 }
 
 double computeSquareRectangle(double a, double b) { // for f3
-	return a * b;
+	return a * b; // the formula of rectangle's square
 }
 
 double computeSquareTriangle(double h, double x) { // for f3
-	return h * x / 2;
+	return h * x / 2; // the formula of triangle's square
 }
 
 double computeSquareCircle(double r) { // for f3
-	return M_PI * pow(r, 2);
+	return M_PI * pow(r, 2); // the formula of circle's square
 }
 
-void f3() {
-	cout << "Введите:\n1, если хотите посчитать S прямоугольника.\n2, если хотите посчитать S треугольника.\n3, если хотите посчитать S круга.\nВведённое значение:\n";
+void f3GeometricFigures() {
+	cout << "Enter:\n1, if you need to compute S of rectangle.\n"
+		"2, if you need to compute S of triangle.\n"
+		"3, if you need to compute S of circle.\n"
+		"Entered value:\n";
 	int chose = inicializeNotNegativeInteger(); // choosing figure
 	if (chose == 1)
 	{
-		cout << "Введите значения сторон прямоугольника:\n";
+		cout << "Enter the values of the sides of the rectangle:\n";
 		double a = inicializeNotNegativeDouble();
 		double b = inicializeNotNegativeDouble();
-		cout << "S прямоугольника = " << computeSquareRectangle(a, b) << "." << endl;
+		cout << "S of rectangle = " << computeSquareRectangle(a, b) << ".\n";
 	}
 	else if (chose == 2)
 	{
-		cout << "Введите значения длин основания и проведённой к нему высоты:\n";
+		cout << "Enter the values of base length and height drawn to it:\n";
 		double h = inicializeNotNegativeDouble();
 		double x = inicializeNotNegativeDouble();
-		cout << "S треугольника = " << computeSquareTriangle(h, x) << "." << endl;
+		cout << "S of triangle = " << computeSquareTriangle(h, x) << ".\n";
 	}
 	else if (chose == 3)
 	{
-		cout << "Введите значение радиуса круга:\n";
+		cout << "Enter the value of circle radius:\n";
 		double r = inicializeNotNegativeDouble();
-		cout << "S круга = " << computeSquareCircle(r) << "." << endl;
+		cout << "S of circle = " << computeSquareCircle(r) << ".\n";
 	}
 	else
 	{
-		cout << "Количество данных фигур не превышает 3.\n";
+		cout << "Number of figures can't be more than 3.\nTry again.\n";
 	}
 }
 
-void f4() {
+void f4PastGlory() {
 	//realisation 3:
-	for (int i = 0; i < 13; ++i)
-	{
-		if (i < 6) {
-			if (0 == i % 2) {
-				for (int j = 0; j < 8; ++j)
-				{
+	for (int i = 0; i < 13; ++i) { // number of lines is 13
+		if (i < 6) { // lines with * and /
+			if (0 == i % 2) { // if line is even
+				for (int j = 0; j < 8; ++j) { // fill by *
 					cout << "  *";
 				}
 				cout.width(60);
-				cout << setw(60) << setfill('/');
+				cout << setw(60) << setfill('/'); // fill the rest of line by /
 			}
-			else {
-				cout << " ";
-				for (int j = 0; j < 8; ++j)
+			else { // if line is uneven
+				cout << " "; 
+				for (int j = 0; j < 8; ++j) { 
 					cout << "*  ";
+				}
 			}
-			cout << '\n';
+			cout << '\n'; // go to next line
 		}
 
 	}
-	for (int i = 1; i < 8; ++i)
+	for (int i = 1; i < 8; ++i) // fill the rest lines (without *)
 	{
 		if (0 == i % 2)
 		{
@@ -194,52 +205,61 @@ void f4() {
 	}
 }
 
-void f5() {
-	system("\"D:/Microsoft VS source/C++/Home Tasks/1 курс/ДЗ №5 на 6ю неделю/Task 5 (graph)/Debug/Task 5 (graph).exe\"");
+void f5SinusoidGraph() {
+	system("\"D:/Microsoft VS source/C++/Home Tasks/1 курс/ДЗ №5 на 6ю неделю/"
+		   "Task 5 (graph)/Debug/Task 5 (graph).exe\""); // path to the file
 }
 
-bool isCorrect(string romanianNumber) {
-	if (romanianNumber.length() > 4) {
-		for (size_t i = 0; i != romanianNumber.length() - 4; i++) {
-			if (romanianNumber[i] == romanianNumber[i + 1] &&
-				romanianNumber[i + 1] == romanianNumber[i + 2] &&
-				romanianNumber[i + 2] == romanianNumber[i + 3] &&
-				romanianNumber[i + 3] == romanianNumber[i + 4]) {
+bool isCorrect(string romanNumber) { 
+	// check for 4 and more identical elements in a row:
+	if (romanNumber.length() > 3) { // check for acces to compare 4 elements
+		for (size_t i = 0; i != romanNumber.length() - 3; i++) {
+			if (romanNumber[i] == romanNumber[i + 1] &&
+				romanNumber[i + 1] == romanNumber[i + 2] &&
+				romanNumber[i + 2] == romanNumber[i + 3]) { // comparing
 				return false;
 			}
 		}
 	}
-	char romanianNumbers[7] = { 'I', 'V', 'X', 'L', 'C', 'D', 'M' };
-	for (size_t i = 0; i < romanianNumber.length(); i++) {	
-		bool isromanianNumber = false;
+	char romanNumbers[7] = { 'I', 'V', 'X', 'L', 'C', 'D', 'M' };
+	// belonging of the element of the entered number to the roman num alphabet
+	for (size_t i = 0; i < romanNumber.length(); i++) {	
+		bool isromanNumber = false; 
 		for (size_t j = 0; j < 7; j++) {
-			if (romanianNumber[i] == romanianNumbers[j]) {
-				isromanianNumber = true;
+			if (romanNumber[i] == romanNumbers[j]) {
+				isromanNumber = true;
 			}
 		}
-		if (!isromanianNumber) {
+		if (!isromanNumber) {
 			return false;
 		}
 	}
 	return true;
 }
 
-void f6() {
-	cout << "Enter romaniac number:\n";
-	string romanianNumber;
-	cin >> romanianNumber;
-	if (isCorrect( romanianNumber )) {
-		char romanianNumbers[7] = { 'I', 'V', 'X', 'L', 'C', 'D', 'M' };
+void f6AutomaticRecognizer() {
+	cout << "Enter romanian number:\n";
+	string romanNumber;
+	cin >> romanNumber;
+	if (isCorrect(romanNumber)) { // if number is correct according to rules
+		char romanNumbers[7] = { 'I', 'V', 'X', 'L', 'C', 'D', 'M' };
+		// equal to romanian numbers
 		int arabicNumbers[7] = { 1, 5, 10, 50, 100, 500, 1000 };
-		int arabicNumber = 0;
-		for (size_t i = 0; i < romanianNumber.length(); i++) {
+		int arabicNumber = 0; // final decimal arabic number
+		// iteration over all elements of the entered roman number:
+		for (size_t i = 0; i < romanNumber.length(); i++) {
+			// iteration over all roman numbers to compare with certain element:
 			for (size_t j = 0; j < 7; j++) {
-				if (romanianNumber[i] == romanianNumbers[j]) {
-					if (i + 1 < romanianNumber.length()) {
-						for (size_t k = 0; k < 7; k++) {
-							if (romanianNumber[i + 1] == romanianNumbers[k]) {
+				if (romanNumber[i] == romanNumbers[j]) { // possibility to
+					// compare with next element:
+					if (i + 1 < romanNumber.length()) { 
+						// iteration over all roman numbers to compare with
+						// next element:
+						for (size_t k = 0; k < 7; k++) { // i
+							if (romanNumber[i + 1] == romanNumbers[k]) {
 								if (j < k) {
-									arabicNumber -= arabicNumbers[j];
+									// if certain < next
+									arabicNumber -= arabicNumbers[j]; 
 								}
 								else {
 									arabicNumber += arabicNumbers[j];
@@ -247,64 +267,69 @@ void f6() {
 							}
 						}
 					}
-					else {
+					else { // if elem if the last it can't be below zero
 						arabicNumber += arabicNumbers[j];
 					}
 				}
 			}
 		}
-		cout << "Entered romaniac number is euqal to "<< arabicNumber << " decimal arabic number." << endl;
+		cout << "Entered roman number is euqal to "<< arabicNumber
+			 << " decimal arabic number.\n"; 
 	}
-	else {
-		cout << "Wrong number entered.\nTry again and enter the number correctly.\n";
+	else { // if number is uncorrect
+		cout << "Wrong number entered.\n"
+				"Try again and enter the number correctly.\n";
 	}
 }
 
-void generatePseudoRandomNumber(int flag) {
+void generatePseudoRandomNumber(int path) {
 	int nS = 0, m, a, c;
-	if (flag == 0) {
-		cout << "Введите значение множителя m:\n";
+	// options depends on chose:
+	if (path == 0) {
+		cout << "Enter the value of multiplier m:\n";
 		m = inicializeInteger();
-		cout << "Введите значение инкремента a:\n";
+		cout << "Enter the value of increment a:\n";
 		a = inicializeInteger();
-		cout << "Введите диапазон последовательности c:\n";
+		cout << "Enter the sequence range c:\n";
 		c = inicializeInteger();
 	}
-	else if (flag == 1) {
+	else if (path == 1) { // I set
 		m = 37;
-		cout << "Значение множителя m: " << m << ".\n";
+		cout << "Enter the value of multiplier m: " << m << ".\n";
 		a = 3;
-		cout << "Значение инкремента a: " << a << ".\n";
+		cout << "Enter the value of increment a: " << a << ".\n";
 		c = 64;
-		cout << "Диапазон последовательности c: " << c << ".\n";
+		cout << "Enter the sequence range c: " << c << ".\n";
 	}
-	else {
+	else { // II set
 		m = 25173;
-		cout << "Значение множителя m: " << m << ".\n";
+		cout << "Enter the value of multiplier m: " << m << ".\n";
 		a = 13849;
-		cout << "Значение инкремента a: " << a << ".\n";
+		cout << "Enter the value of increment a: " << a << ".\n";
 		c = 65537;
-		cout << "Диапазон последовательности c: " << c << ".\n";
+		cout << "Enter the sequence range c: " << c << ".\n";
 	}
-	cout << "Введите величину последовательности maxLen:\n";
+	cout << "Enter the number of elements in a sequence maxLen:\n";
 	int maxLen = inicializeNotNegativeInteger();
 	cout << endl;
-	for (int i = 0; i < maxLen; i++) {
+	for (int i = 0; i < maxLen; i++) { // generation by iteration
 		nS = (m * nS + a) % c;
-		cout << "Псевдослучайное число: " << nS << ".\n";
+		cout << "Pseudorandom number is: " << nS << ".\n";
 	}
 	cout << endl;
 }
 
-void f7() {
-	cout << "Выберите:\n1, чтобы продолжить с самостоятельным вводом чисел.\n2, чтобы воспользоваться готовыми вариантами чисел.\n";
+void f7PseudoRandomNumberGenerator() {
+	cout << "Choose:\n1, to continue with entering numbers.\n"
+			"2, to continue with prepared sets of numbers.\n";
 	int choosePath = inicializeNotNegativeInteger();
 	switch (choosePath) {
 	case 1 :
 		generatePseudoRandomNumber(0);
 		break;
 	case 2 :
-		cout << "Выберите:\n1, чтобы продолжить с I вариантом.\n2, чтобы продолжить с II вариантом.\n";
+		cout << "Choose:\n1, to continue with I set of numbers.\n"
+			    "2, to continue with II set of numbers.\n";
 		choosePath = inicializeNotNegativeInteger();
 		switch (choosePath) {
 		case 1 :
@@ -316,15 +341,15 @@ void f7() {
 		}
 		break;
 	default :
-		cout << "Введённое число не соответствует предложенным действиям.\nПопробуйте снова.\n";
+		cout << "Entered number doesn't match the suggested.\nTry again.\n";
 		break;
 	}
 }
 
-void f8() {
+void f8MatrixMultiplication() {
 	float productsArray[3][4] = { {5, 2, 0, 10}, {3, 5, 2, 5}, {20, 0, 0, 0} };
 	float profitsArray[3][2] = { 0 };
-	float pricesArray[4][2] = { {1.2f, 0.5f}, {2.8f, 0.4f}, {5.0f, 1.0f}, {2.0f, 1.5f} };
+	float pricesArray[4][2] = { {1.2, 0.5}, {2.8, 0.4}, {5.0, 1.0}, {2.0, 1.5} };
 	cout << endl << "Матрица C = A * B:\n\n";
 	for (size_t i = 0; i < 3; i++) {
 		for (size_t j = 0; j < 4; j++) {
@@ -338,9 +363,12 @@ void f8() {
 		cout << profitsArray[i][0] << "\t" << profitsArray[i][1] << endl;
 	}
 
-	float sumProfit = 0, sumCommision = 0, maxProfitSeller, maxCommissionSeller, minProfitSeller, minCommissionSeller;
+	float sumProfit = 0.0, sumCommision = 0.0, maxProfitSeller, 
+		  maxCommissionSeller, minProfitSeller, minCommissionSeller;
 
-	float minProfit = numeric_limits<float>::max(), minCommision = minProfit, maxProfit = numeric_limits<float>::lowest(), maxCommision = maxProfit;
+	float minProfit = numeric_limits<float>::max(), minCommision = minProfit, 
+		  maxProfit = numeric_limits<float>::lowest(), 
+		  maxCommision = maxProfit;
 
 	for (size_t i = 0; i < 3; i++) {
 
@@ -371,34 +399,46 @@ void f8() {
 			}
 		}
 	}
-	cout << "\nОтветы на вопросы задачи:\n1)" << maxProfitSeller << "й продавец выручил больше всего денег с продаж, " << minProfitSeller << "й продавец выручил меньше всего денег с продаж.\n";
-	cout << "2)" << maxCommissionSeller << "й продавец получил наибольшие коммисионные с продаж, " << minCommissionSeller << "й продавец получил наименьшие коммисионные с продаж.\n";
-	cout << "3)Общая сумма денег, вырученных за проданные товары, равна " << sumProfit << ".\n4)Общая сумма коммиссионых, полученных продавцами, равна " << sumCommision << ".\n";
-	cout << "5)Общая сумма денег, прошедших через руки продавцов, равна " << sumProfit + sumCommision << ".\n\n";
+	cout << "\nОтветы на вопросы задачи:\n1)" << maxProfitSeller 
+		 << "й продавец выручил больше всего денег с продаж, " 
+		 << minProfitSeller << "й продавец выручил меньше всего "
+			"денег с продаж.\n";
+	cout << "2)" << maxCommissionSeller 
+		 << "й продавец получил наибольшие коммисионные с продаж, " 
+		 << minCommissionSeller << "й продавец получил наименьшие "
+			"коммисионные с продаж.\n";
+	cout << "3)Общая сумма денег, вырученных за проданные товары, равна " 
+		 << sumProfit << ".\n4)Общая сумма коммиссионых, "
+			"полученных продавцами, равна " << sumCommision << ".\n";
+	cout << "5)Общая сумма денег, прошедших через руки продавцов, равна " 
+		 << sumProfit + sumCommision << ".\n\n";
 }
 
-void f9() {
+void f9NumberSystems() {
 	string number, number_end;
 	int ss1, ss2, number_int = 0;
-	cout << "Введите число:\n";
+	cout << "Enter the number:\n";
 	cin >> number;
-	cout << "Введите изначальную систему счисления:\n";
+	cout << "Enter original number system:\n";
 	ss1 = inicializeNotNegativeInteger();
-	cout << "Введите конечную систему счисления:\n";
+	cout << "Enter final number result:\n";
 	ss2 = inicializeNotNegativeInteger();
 	vector <char> alphabet; // inicialization of not-fixed len vector
 	for (size_t i = 65; i < 65 + 26; i++) 
 	{
 		alphabet.push_back((char)i); // appending letter to the end of vector
 	}
-	for (int i = number.length()-1; i >= 0; i--) // reversed iteration for transfer to decimal sys
+	// reversed iteration for transfer to decimal system:
+	for (int i = number.length()-1; i >= 0; i--) 
 	{
 		char rank_s = number[i]; 
-		if (find(alphabet.begin(), alphabet.end(), rank_s) != alphabet.end()) // if char is letter 
+		// if char is letter:
+		if (find(alphabet.begin(), alphabet.end(), rank_s) != alphabet.end())  
 		{
 			number_int += (static_cast<int>(rank_s) - 55) * pow(ss1, (number.length() - 1 - i));
 		}
-		else // if char is number
+		// if char is number:
+		else 
 		{
 			number_int += (static_cast<int>(rank_s) - 48) * pow(ss1, (number.length() - 1 - i));
 		}
@@ -416,49 +456,52 @@ void f9() {
 		}
 		number_int /= ss2; // <= rank
 	}
-	cout << "Итоговый результат: " << number_end << "." << endl;
+	cout << "Final result: " << number_end << ".\n";
 }
 
 int main() {
 	int chooseTask;
 	setlocale(LC_ALL, "Russian");
-	cout << "Номер задачи не превышает 9.\n" << "Чтобы закончить работу, введите 0.\n";
-	cout << "Введите номер задачи: \n";
+	cout << "Hello!\nTask number can't be more than 9.\n" 
+			"Enter 0 to end the programm.\n"
+			"Enter the task number: \n";
 	chooseTask = inicializeNotNegativeInteger();
 	while (chooseTask > 0) {
 		switch (chooseTask) {
 		case 1 :
-			f1();
+			f1File();
 			break;
 		case 2 :
-			f2();
+			f2NumberSign();
 			break;
 		case 3 :
-			f3();
+			f3GeometricFigures();
 			break;
 		case 4 :
-			f4();
+			f4PastGlory();
 			break;
 		case 5 :
-			f5();
+			f5SinusoidGraph();
 			break;
 		case 6 :
-			f6();
+			f6AutomaticRecognizer();
 			break;
 		case 7 :
-			f7();
+			f7PseudoRandomNumberGenerator();
 			break;
 		case 8 :
-			f8();
+			f8MatrixMultiplication();
 			break;
 		case 9 :
-			f9();
+			f9NumberSystems();
 			break;
 		default :
-			cout << "Номер задачи не превышает 9.\n" << "Чтобы закончить работу, введите 0.\n";
+			cout << "Entered task number is incorrect, try again.\n"
+					"Task number can't be more than 9.\n"
+					"Enter 0 to end the programm.\n";
 			break;
 		}
-		cout << "Введите номер следующей задачи: \n";
+		cout << "Enter the next task number:\n";
 		chooseTask = inicializeNotNegativeInteger();;
 	}
 }
