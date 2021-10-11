@@ -7,8 +7,8 @@
 #include <stdlib.h> // for rand, srand
 #include <time.h> // for time
 #include "Header.h" // for running f4_1 or f4_2
-#include <iomanip> // for f4 setw
-#include <vector> // for f9 vector
+#include <iomanip> // for setw
+#include <vector> // for vector
 
 using namespace std;
 
@@ -66,7 +66,7 @@ void f1() {
 	}
 	else
 	{	
-		srand(time(NULL)); // randomizing depends on time
+		srand(time(0)); // randomizing depends on time
 		float variable;
 		for (size_t i = 0; i < 10; i++)
 		{
@@ -198,8 +198,66 @@ void f5() {
 	system("\"D:/Microsoft VS source/C++/Home Tasks/1 курс/ДЗ №5 на 6ю неделю/Task 5 (graph)/Debug/Task 5 (graph).exe\"");
 }
 
+bool isCorrect(string romanianNumber) {
+	if (romanianNumber.length() > 4) {
+		for (size_t i = 0; i != romanianNumber.length() - 4; i++) {
+			if (romanianNumber[i] == romanianNumber[i + 1] &&
+				romanianNumber[i + 1] == romanianNumber[i + 2] &&
+				romanianNumber[i + 2] == romanianNumber[i + 3] &&
+				romanianNumber[i + 3] == romanianNumber[i + 4]) {
+				return false;
+			}
+		}
+	}
+	char romanianNumbers[7] = { 'I', 'V', 'X', 'L', 'C', 'D', 'M' };
+	for (size_t i = 0; i < romanianNumber.length(); i++) {	
+		bool isromanianNumber = false;
+		for (size_t j = 0; j < 7; j++) {
+			if (romanianNumber[i] == romanianNumbers[j]) {
+				isromanianNumber = true;
+			}
+		}
+		if (!isromanianNumber) {
+			return false;
+		}
+	}
+	return true;
+}
+
 void f6() {
-	
+	cout << "Enter romaniac number:\n";
+	string romanianNumber;
+	cin >> romanianNumber;
+	if (isCorrect( romanianNumber )) {
+		char romanianNumbers[7] = { 'I', 'V', 'X', 'L', 'C', 'D', 'M' };
+		int arabicNumbers[7] = { 1, 5, 10, 50, 100, 500, 1000 };
+		int arabicNumber = 0;
+		for (size_t i = 0; i < romanianNumber.length(); i++) {
+			for (size_t j = 0; j < 7; j++) {
+				if (romanianNumber[i] == romanianNumbers[j]) {
+					if (i + 1 < romanianNumber.length()) {
+						for (size_t k = 0; k < 7; k++) {
+							if (romanianNumber[i + 1] == romanianNumbers[k]) {
+								if (j < k) {
+									arabicNumber -= arabicNumbers[j];
+								}
+								else {
+									arabicNumber += arabicNumbers[j];
+								}
+							}
+						}
+					}
+					else {
+						arabicNumber += arabicNumbers[j];
+					}
+				}
+			}
+		}
+		cout << "Entered romaniac number is euqal to "<< arabicNumber << " decimal arabic number." << endl;
+	}
+	else {
+		cout << "Wrong number entered.\nTry again and enter the number correctly.\n";
+	}
 }
 
 void generatePseudoRandomNumber(int flag) {
@@ -242,22 +300,22 @@ void f7() {
 	cout << "Выберите:\n1, чтобы продолжить с самостоятельным вводом чисел.\n2, чтобы воспользоваться готовыми вариантами чисел.\n";
 	int choosePath = inicializeNotNegativeInteger();
 	switch (choosePath) {
-	case 1:
+	case 1 :
 		generatePseudoRandomNumber(0);
 		break;
-	case 2:
+	case 2 :
 		cout << "Выберите:\n1, чтобы продолжить с I вариантом.\n2, чтобы продолжить с II вариантом.\n";
 		choosePath = inicializeNotNegativeInteger();
 		switch (choosePath) {
-		case 1:
+		case 1 :
 			generatePseudoRandomNumber(1);
 			break;
-		case 2:
+		case 2 :
 			generatePseudoRandomNumber(2);
 			break;
 		}
 		break;
-	default:
+	default :
 		cout << "Введённое число не соответствует предложенным действиям.\nПопробуйте снова.\n";
 		break;
 	}
@@ -266,7 +324,7 @@ void f7() {
 void f8() {
 	float productsArray[3][4] = { {5, 2, 0, 10}, {3, 5, 2, 5}, {20, 0, 0, 0} };
 	float profitsArray[3][2] = { 0 };
-	float pricesArray[4][2] = { {1.2, 0.5}, {2.8, 0.4}, {5, 1}, {2, 1.5} };
+	float pricesArray[4][2] = { {1.2f, 0.5f}, {2.8f, 0.4f}, {5.0f, 1.0f}, {2.0f, 1.5f} };
 	cout << endl << "Матрица C = A * B:\n\n";
 	for (size_t i = 0; i < 3; i++) {
 		for (size_t j = 0; j < 4; j++) {
@@ -367,38 +425,36 @@ int main() {
 	cout << "Номер задачи не превышает 9.\n" << "Чтобы закончить работу, введите 0.\n";
 	cout << "Введите номер задачи: \n";
 	chooseTask = inicializeNotNegativeInteger();
-	while (chooseTask > 0)
-	{
-		switch (chooseTask)
-		{
-		case 1:
+	while (chooseTask > 0) {
+		switch (chooseTask) {
+		case 1 :
 			f1();
 			break;
-		case 2:
+		case 2 :
 			f2();
 			break;
-		case 3:
+		case 3 :
 			f3();
 			break;
-		case 4:
+		case 4 :
 			f4();
 			break;
-		case 5:
+		case 5 :
 			f5();
 			break;
-		case 6:
+		case 6 :
 			f6();
 			break;
-		case 7:
+		case 7 :
 			f7();
 			break;
-		case 8:
+		case 8 :
 			f8();
 			break;
-		case 9:
+		case 9 :
 			f9();
 			break;
-		default:
+		default :
 			cout << "Номер задачи не превышает 9.\n" << "Чтобы закончить работу, введите 0.\n";
 			break;
 		}
