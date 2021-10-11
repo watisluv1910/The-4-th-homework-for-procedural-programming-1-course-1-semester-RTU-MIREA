@@ -350,7 +350,7 @@ void f8MatrixMultiplication() {
 	float productsArray[3][4] = { {5, 2, 0, 10}, {3, 5, 2, 5}, {20, 0, 0, 0} };
 	float profitsArray[3][2] = { 0 };
 	float pricesArray[4][2] = { {1.2, 0.5}, {2.8, 0.4}, {5.0, 1.0}, {2.0, 1.5} };
-	cout << endl << "Матрица C = A * B:\n\n";
+	cout << endl << "Matrix C = A * B:\n\n";
 	for (size_t i = 0; i < 3; i++) {
 		for (size_t j = 0; j < 4; j++) {
 			// i - index of seller
@@ -399,18 +399,19 @@ void f8MatrixMultiplication() {
 			}
 		}
 	}
-	cout << "\nОтветы на вопросы задачи:\n1)" << maxProfitSeller 
-		 << "й продавец выручил больше всего денег с продаж, " 
-		 << minProfitSeller << "й продавец выручил меньше всего "
-			"денег с продаж.\n";
+	cout << "\nAnswers to the questions of task:\n1)" << maxProfitSeller
+		 << " seller received the most amount of money from sales, "
+		 << minProfitSeller << " seller received the least amount "
+		    "of money from sales.\n";
 	cout << "2)" << maxCommissionSeller 
-		 << "й продавец получил наибольшие коммисионные с продаж, " 
-		 << minCommissionSeller << "й продавец получил наименьшие "
-			"коммисионные с продаж.\n";
-	cout << "3)Общая сумма денег, вырученных за проданные товары, равна " 
-		 << sumProfit << ".\n4)Общая сумма коммиссионых, "
-			"полученных продавцами, равна " << sumCommision << ".\n";
-	cout << "5)Общая сумма денег, прошедших через руки продавцов, равна " 
+		 << " seller received the highest amount of commission on sales, " 
+		 << minCommissionSeller << " seller received the least amount "
+			"of commission on sales.\n";
+	cout << "3)The total amount of money received for goods sold is " 
+		 << sumProfit << ".\n4)The total amount of commision "
+			"received by sellers is " << sumCommision << ".\n";
+	cout << "5)The total amount of money, "
+			"passed through the hands of sellers " 
 		 << sumProfit + sumCommision << ".\n\n";
 }
 
