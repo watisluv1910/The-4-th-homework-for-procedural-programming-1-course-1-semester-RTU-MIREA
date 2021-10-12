@@ -211,16 +211,6 @@ void f5SinusoidGraph() {
 }
 
 bool isCorrect(string romanNumber) { 
-	// check for 4 and more identical elements in a row:
-	if (romanNumber.length() > 3) { // check for acces to compare 4 elements
-		for (size_t i = 0; i != romanNumber.length() - 3; i++) {
-			if (romanNumber[i] == romanNumber[i + 1] &&
-				romanNumber[i + 1] == romanNumber[i + 2] &&
-				romanNumber[i + 2] == romanNumber[i + 3]) { // comparing
-				return false;
-			}
-		}
-	}
 	char romanNumbers[7] = { 'I', 'V', 'X', 'L', 'C', 'D', 'M' };
 	// belonging of the element of the entered number to the roman num alphabet
 	for (size_t i = 0; i < romanNumber.length(); i++) {	
@@ -232,6 +222,26 @@ bool isCorrect(string romanNumber) {
 		}
 		if (!isromanNumber) {
 			return false;
+		}
+	}
+	// check for 4 and more identical elements in a row:
+	if (romanNumber.length() > 3) { // check for acces to compare 4 elements
+		for (size_t i = 0; i != romanNumber.length() - 3; i++) {
+			if (romanNumber[i] == romanNumber[i + 1] &&
+				romanNumber[i + 1] == romanNumber[i + 2] &&
+				romanNumber[i + 2] == romanNumber[i + 3]) { // comparing
+				return false;
+			}
+		}
+	}
+	// check for 2 and more identical numbers less than the next not identical
+	if (romanNumber.length() > 2) {
+		for (size_t i = romanNumber.length(); i != 1; i--)
+		{
+			if (romanNumber[i] > romanNumber[i - 1] &&
+				romanNumber[i - 1] == romanNumber[i - 2]) { // comparing
+				return false;
+			}
 		}
 	}
 	return true;
