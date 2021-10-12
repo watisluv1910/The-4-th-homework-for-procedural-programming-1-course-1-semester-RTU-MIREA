@@ -426,9 +426,10 @@ void f8MatrixMultiplication() {
 }
 
 void f9NumberSystems() {
-	string number, number_end;
-	int ss1, ss2, number_int = 0;
-	cout << "Enter the number:\n";
+	string number, numberEnd;
+	int ss1, ss2, numberInteger = 0;
+	float numberFloat = 0.0f;
+	cout << "Enter the number (if the number if fractal, use (,)):\n";
 	cin >> number;
 	cout << "Enter original number system:\n";
 	ss1 = inicializeNotNegativeInteger();
@@ -439,35 +440,104 @@ void f9NumberSystems() {
 	{
 		alphabet.push_back((char)i); // appending letter to the end of vector
 	}
-	// reversed iteration for transfer to decimal system:
-	for (int i = number.length()-1; i >= 0; i--) 
-	{
-		char rank_s = number[i]; 
-		// if char is letter:
-		if (find(alphabet.begin(), alphabet.end(), rank_s) != alphabet.end())  
-		{
-			number_int += (static_cast<int>(rank_s) - 55) * pow(ss1, (number.length() - 1 - i));
+	string::size_type pointIndexString = number.find(","); // check point place
+	int pointIndexInteger = number.find(",");
+	if (pointIndexString == string::npos) { // if there is no , in number
+		// reversed iteration for transfer to decimal system:
+		for (int i = number.length() - 1; i >= 0; i--) {
+			char rankCh = number[i];
+			// if char is letter:
+			if (find(alphabet.begin(), alphabet.end(), rankCh) != alphabet.end()) {
+				numberInteger += (static_cast<int>(rankCh) - 55) * pow(ss1, (number.length() - 1 - i));
+			}
+			// if char is number:
+			else {
+				numberInteger += (static_cast<int>(rankCh) - 48) * pow(ss1, (number.length() - 1 - i));
+			}
 		}
-		// if char is number:
-		else 
-		{
-			number_int += (static_cast<int>(rank_s) - 48) * pow(ss1, (number.length() - 1 - i));
+		while (numberInteger > 0) { // transfer to ss2
+			if (numberInteger % ss2 >= 10) { // transfer number to letter
+				char rankCh = (char)((numberInteger % ss2) + 55);
+				numberEnd = rankCh + numberEnd;
+			}
+			else {
+				numberEnd = to_string(numberInteger % ss2) + numberEnd;
+			}
+			numberInteger /= ss2; // <= rank
 		}
 	}
-	while (number_int > 0) // transfer to ss2
-	{
-		if (number_int % ss2 >= 10) // transfer number to letter
-		{
-			char rank_ch = (char)((number_int % ss2) + 55);
-			number_end = rank_ch + number_end;
+	else { // if , is in number
+		// reversed iteration for transfer to decimal system before point point:
+		for (int i = pointIndexInteger - 1; i >= 0; i--) {
+			char rankCh = number[i];
+			// if char is letter:
+			if (find(alphabet.begin(), alphabet.end(), rankCh) != alphabet.end()) {
+				numberInteger += (static_cast<int>(rankCh) - 55) * pow(ss1, (pointIndexInteger - 1 - i));
+			}
+			// if char is number:
+			else {
+				numberInteger += (static_cast<int>(rankCh) - 48) * pow(ss1, (pointIndexInteger - 1 - i));
+			}
 		}
-		else
-		{
-			number_end = to_string(number_int % ss2) + number_end;
+		// reversed iteration for transfer to decimal system after point point:
+		for (int i = number.length() - 1; i > pointIndexInteger; i--) {
+			char rankCh = number[i];
+			// if char is letter:
+			if (find(alphabet.begin(), alphabet.end(), rankCh) != alphabet.end()) {
+				numberFloat += (static_cast<int>(rankCh) - 55) * pow(ss1, (-1*(i - pointIndexInteger)));
+			}
+			// if char is number:
+			else {
+				numberFloat += (static_cast<int>(rankCh) - 48) * pow(ss1, (-1*(i - pointIndexInteger)));
+			}
 		}
-		number_int /= ss2; // <= rank
+		// fractional number in decimal system:
+		float numberDecimal = numberInteger + numberFloat; 
+		while (numberInteger > 0) { // transfer integer part to ss2
+			if (numberInteger % ss2 >= 10) { // transfer number to letter
+				char rankCh = (char)((numberInteger % ss2) + 55);
+				numberEnd = rankCh + numberEnd;
+			}
+			else {
+				numberEnd = to_string(numberInteger % ss2) + numberEnd;
+			}
+			numberInteger /= ss2; // <= rank
+		}
+		numberEnd += ","; // adding the point to integer
+		string numberFloatString = to_string(numberFloat);
+		pointIndexInteger = numberFloatString.find(","); 
+		float transferAccuracy = 1.0f / pow(ss2, numberFloatString.length() - 1 - pointIndexInteger);
+		// transfer fractional part to ss2:
+		int counterOfRanks = 0;
+		cout << "Enter needful number of ranks after (,):\n";
+		int maxCountOfRanks = inicializeNotNegativeInteger();
+		while (stof(numberFloatString.substr(numberFloatString.find(",") + 1, numberFloatString.length() - 1 - numberFloatString.find(","))) > transferAccuracy) {
+			numberFloatString = to_string(numberFloat *= ss2);
+			// the integer part of numberFloat
+			string integerPart = numberFloatString.substr(0, numberFloatString.find(","));
+			// transfer number to letter:
+			if (stoi(integerPart) % ss2 >= 10) {
+				if (counterOfRanks >= maxCountOfRanks) {
+					break;
+				}
+				else {
+					char rankCh = (char)(stoi(integerPart) % ss2 + 55);
+					numberEnd = numberEnd + rankCh;
+					counterOfRanks++;
+				}
+			}
+			else {
+				if (counterOfRanks >= maxCountOfRanks) {
+					break;
+				}
+				else {
+					numberEnd = numberEnd + to_string(stoi(integerPart) % ss2);
+					counterOfRanks++;
+				}
+			}
+		}
 	}
-	cout << "Final result: " << number_end << ".\n";
+	cout << "Final result is: " << numberEnd << ".\n";
 }
 
 int main() {
