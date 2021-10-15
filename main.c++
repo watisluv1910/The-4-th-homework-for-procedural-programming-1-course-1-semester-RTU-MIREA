@@ -68,7 +68,7 @@ void f1File() {
 	ofstream fout; // output file stream (writing)
 	string path = "text_file_f1.txt"; // path to the file
 	fout.open(path); 
-	if (!fout.is_open()) // chacking for the successful
+	if (!fout.is_open()) // checking for the successful
 	{
 		cout << "File opening error." << endl;
 	}
