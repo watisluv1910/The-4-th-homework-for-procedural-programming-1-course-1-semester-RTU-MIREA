@@ -468,7 +468,7 @@ void f9NumberSystems() {
 		}
 	}
 	else { // if , is in number
-		// reversed iteration for transfer to decimal system before point point:
+		// reversed iteration for transfer to decimal system before point:
 		for (int i = pointIndexInteger - 1; i >= 0; i--) {
 			char rankCh = number[i];
 			// if char is letter:
@@ -480,7 +480,7 @@ void f9NumberSystems() {
 				numberInteger += (static_cast<long>(rankCh) - 48) * pow(ss1, (pointIndexInteger - 1 - i));
 			}
 		}
-		// reversed iteration for transfer to decimal system after point point:
+		// reversed iteration for transfer to decimal system after point:
 		for (int i = number.length() - 1; i > pointIndexInteger; i--) {
 			char rankCh = number[i];
 			// if char is letter:
@@ -506,7 +506,7 @@ void f9NumberSystems() {
 		}
 		numberEnd += ","; // adding the point to integer
 		string numberFloatString = to_string(numberFloat);
-		pointIndexInteger = numberFloatString.find(","); 
+		pointIndexInteger = numberFloatString.find(",");
 		float transferAccuracy = 1.0f / pow(ss2, numberFloatString.length() - 1 - pointIndexInteger);
 		// transfer fractional part to ss2:
 		int counterOfRanks = 0;
