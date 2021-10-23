@@ -427,7 +427,8 @@ void f8MatrixMultiplication() {
 
 void f9NumberSystems() {
 	string number, numberEnd;
-	int ss1, ss2, numberInteger = 0;
+	int ss1, ss2;
+	long numberInteger = 0;
 	float numberFloat = 0.0f;
 	cout << "Enter the number (if the number if fractal, use (,)):\n";
 	cin >> number;
@@ -448,11 +449,11 @@ void f9NumberSystems() {
 			char rankCh = number[i];
 			// if char is letter:
 			if (find(alphabet.begin(), alphabet.end(), rankCh) != alphabet.end()) {
-				numberInteger += (static_cast<int>(rankCh) - 55) * pow(ss1, (number.length() - 1 - i));
+				numberInteger += (static_cast<long>(rankCh) - 55) * pow(ss1, (number.length() - 1 - i));
 			}
 			// if char is number:
 			else {
-				numberInteger += (static_cast<int>(rankCh) - 48) * pow(ss1, (number.length() - 1 - i));
+				numberInteger += (static_cast<long>(rankCh) - 48) * pow(ss1, (number.length() - 1 - i));
 			}
 		}
 		while (numberInteger > 0) { // transfer to ss2
@@ -472,11 +473,11 @@ void f9NumberSystems() {
 			char rankCh = number[i];
 			// if char is letter:
 			if (find(alphabet.begin(), alphabet.end(), rankCh) != alphabet.end()) {
-				numberInteger += (static_cast<int>(rankCh) - 55) * pow(ss1, (pointIndexInteger - 1 - i));
+				numberInteger += (static_cast<long>(rankCh) - 55) * pow(ss1, (pointIndexInteger - 1 - i));
 			}
 			// if char is number:
 			else {
-				numberInteger += (static_cast<int>(rankCh) - 48) * pow(ss1, (pointIndexInteger - 1 - i));
+				numberInteger += (static_cast<long>(rankCh) - 48) * pow(ss1, (pointIndexInteger - 1 - i));
 			}
 		}
 		// reversed iteration for transfer to decimal system after point point:
@@ -484,11 +485,11 @@ void f9NumberSystems() {
 			char rankCh = number[i];
 			// if char is letter:
 			if (find(alphabet.begin(), alphabet.end(), rankCh) != alphabet.end()) {
-				numberFloat += (static_cast<int>(rankCh) - 55) * pow(ss1, (-1*(i - pointIndexInteger)));
+				numberFloat += (static_cast<long>(rankCh) - 55) * pow(ss1, (-1*(i - pointIndexInteger)));
 			}
 			// if char is number:
 			else {
-				numberFloat += (static_cast<int>(rankCh) - 48) * pow(ss1, (-1*(i - pointIndexInteger)));
+				numberFloat += (static_cast<long>(rankCh) - 48) * pow(ss1, (-1*(i - pointIndexInteger)));
 			}
 		}
 		// fractional number in decimal system:
