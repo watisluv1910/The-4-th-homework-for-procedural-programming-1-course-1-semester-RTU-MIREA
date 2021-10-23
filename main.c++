@@ -12,7 +12,7 @@
 
 using namespace std;
 
-double inicializeNotNegativeDouble() { // function that check type error
+double initializeNotNegativeDouble() { // function that check type error
 	double temp_var; // inicialization of temporary variable 
 	while (!(cin >> temp_var) || temp_var < 0)
 	{
@@ -25,7 +25,7 @@ double inicializeNotNegativeDouble() { // function that check type error
 	return temp_var;
 }
 
-double inicializeDouble() { // function that check type error
+double initializeDouble() { // function that check type error
 	double temp_var; // inicialization of temporary variable 
 	while (!(cin >> temp_var))
 	{
@@ -38,7 +38,7 @@ double inicializeDouble() { // function that check type error
 	return temp_var;
 }
 
-int inicializeNotNegativeInteger() { // function that check type error
+int initializeNotNegativeInteger() { // function that check type error
 	int temp_var; // inicialization of temporary variable 
 	while (!(cin >> temp_var) || temp_var < 0)
 	{
@@ -51,7 +51,7 @@ int inicializeNotNegativeInteger() { // function that check type error
 	return temp_var;
 }
 
-int inicializeInteger() { // function that check type error
+int initializeInteger() { // function that check type error
 	int temp_var; // inicialization of temporary variable 
 	while (!(cin >> temp_var))
 	{
@@ -122,7 +122,7 @@ int defineSign(int a) { // for f2
 
 void f2NumberSign() {
 	cout << "Enter the number, which sign is needed to be defined:\n";
-	int x = inicializeInteger();
+	int x = initializeInteger();
 	cout << "The sign of entered number is euqal to  "
 		 << defineSign(x) << " according to the task.\n";
 }
@@ -144,25 +144,25 @@ void f3GeometricFigures() {
 		"2, if you need to compute S of triangle.\n"
 		"3, if you need to compute S of circle.\n"
 		"Entered value:\n";
-	int chose = inicializeNotNegativeInteger(); // choosing figure
+	int chose = initializeNotNegativeInteger(); // choosing figure
 	if (chose == 1)
 	{
 		cout << "Enter the values of the sides of the rectangle:\n";
-		double a = inicializeNotNegativeDouble();
-		double b = inicializeNotNegativeDouble();
+		double a = initializeNotNegativeDouble();
+		double b = initializeNotNegativeDouble();
 		cout << "S of rectangle = " << computeSquareRectangle(a, b) << ".\n";
 	}
 	else if (chose == 2)
 	{
 		cout << "Enter the values of base length and height drawn to it:\n";
-		double h = inicializeNotNegativeDouble();
-		double x = inicializeNotNegativeDouble();
+		double h = initializeNotNegativeDouble();
+		double x = initializeNotNegativeDouble();
 		cout << "S of triangle = " << computeSquareTriangle(h, x) << ".\n";
 	}
 	else if (chose == 3)
 	{
 		cout << "Enter the value of circle radius:\n";
-		double r = inicializeNotNegativeDouble();
+		double r = initializeNotNegativeDouble();
 		cout << "S of circle = " << computeSquareCircle(r) << ".\n";
 	}
 	else
@@ -297,11 +297,11 @@ void generatePseudoRandomNumber(int path) {
 	// options depends on chose:
 	if (path == 0) {
 		cout << "Enter the value of multiplier m:\n";
-		m = inicializeInteger();
+		m = initializeInteger();
 		cout << "Enter the value of increment a:\n";
-		a = inicializeInteger();
+		a = initializeInteger();
 		cout << "Enter the sequence range c:\n";
-		c = inicializeInteger();
+		c = initializeInteger();
 	}
 	else if (path == 1) { // I set
 		m = 37;
@@ -320,7 +320,7 @@ void generatePseudoRandomNumber(int path) {
 		cout << "Enter the sequence range c: " << c << ".\n";
 	}
 	cout << "Enter the number of elements in a sequence maxLen:\n";
-	int maxLen = inicializeNotNegativeInteger();
+	int maxLen = initializeNotNegativeInteger();
 	cout << endl;
 	for (int i = 0; i < maxLen; i++) { // generation by iteration
 		nS = (m * nS + a) % c;
@@ -332,7 +332,7 @@ void generatePseudoRandomNumber(int path) {
 void f7PseudoRandomNumberGenerator() {
 	cout << "Choose:\n1, to continue with entering numbers.\n"
 			"2, to continue with prepared sets of numbers.\n";
-	int choosePath = inicializeNotNegativeInteger();
+	int choosePath = initializeNotNegativeInteger();
 	switch (choosePath) {
 	case 1 :
 		generatePseudoRandomNumber(0);
@@ -340,7 +340,7 @@ void f7PseudoRandomNumberGenerator() {
 	case 2 :
 		cout << "Choose:\n1, to continue with I set of numbers.\n"
 			    "2, to continue with II set of numbers.\n";
-		choosePath = inicializeNotNegativeInteger();
+		choosePath = initializeNotNegativeInteger();
 		switch (choosePath) {
 		case 1 :
 			generatePseudoRandomNumber(1);
@@ -432,10 +432,10 @@ void f9NumberSystems() {
 	cout << "Enter the number (if the number if fractal, use (,)):\n";
 	cin >> number;
 	cout << "Enter original number system:\n";
-	ss1 = inicializeNotNegativeInteger();
-	cout << "Enter final number result:\n";
-	ss2 = inicializeNotNegativeInteger();
-	vector <char> alphabet; // inicialization of not-fixed len vector
+	ss1 = initializeNotNegativeInteger();
+	cout << "Enter final number system:\n";
+	ss2 = initializeNotNegativeInteger();
+	vector <char> alphabet; // initialization of non-fixed len vector
 	for (size_t i = 65; i < 65 + 26; i++) 
 	{
 		alphabet.push_back((char)i); // appending letter to the end of vector
@@ -510,7 +510,7 @@ void f9NumberSystems() {
 		// transfer fractional part to ss2:
 		int counterOfRanks = 0;
 		cout << "Enter needful number of ranks after (,):\n";
-		int maxCountOfRanks = inicializeNotNegativeInteger();
+		int maxCountOfRanks = initializeNotNegativeInteger();
 		while (stof(numberFloatString.substr(numberFloatString.find(",") + 1, numberFloatString.length() - 1 - numberFloatString.find(","))) > transferAccuracy) {
 			numberFloatString = to_string(numberFloat *= ss2);
 			// the integer part of numberFloat
@@ -546,7 +546,7 @@ int main() {
 	cout << "Hello!\nTask number can't be more than 9.\n" 
 			"Enter 0 to end the programm.\n"
 			"Enter the task number: \n";
-	chooseTask = inicializeNotNegativeInteger();
+	chooseTask = initializeNotNegativeInteger();
 	while (chooseTask > 0) {
 		switch (chooseTask) {
 		case 1 :
@@ -583,6 +583,6 @@ int main() {
 			break;
 		}
 		cout << "Enter the next task number:\n";
-		chooseTask = inicializeNotNegativeInteger();;
+		chooseTask = initializeNotNegativeInteger();;
 	}
 }
