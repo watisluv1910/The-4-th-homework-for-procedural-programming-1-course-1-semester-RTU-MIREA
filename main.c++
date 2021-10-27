@@ -8,7 +8,10 @@
 #include <time.h> // for time
 #include "Header.h" // for running f4_1 or f4_2
 #include <iomanip> // for setw
-#include <vector> // for vector
+#include <vector>
+#define NOMINMAX
+#include <windows.h>
+
 
 using namespace std;
 
@@ -177,16 +180,21 @@ void f4PastGlory() {
 		if (i < 6) { // lines with * and /
 			if (0 == i % 2) { // if line is even
 				for (int j = 0; j < 8; ++j) { // fill by *
-					cout << "  *";
+					cout << "\x1b[34m  *\x1b[0m";
 				}
-				cout.width(60);
-				cout << setw(60) << setfill('/'); // fill the rest of line by /
+				cout << ' ';
+				for (size_t i = 0; i < 60; i++)	{
+					cout << "\x1b[31m/\x1b[0m";
+				} // fill the rest of line by /
 			}
 			else { // if line is uneven
 				cout << " "; 
 				for (int j = 0; j < 8; ++j) { 
-					cout << "*  ";
+					cout << "\x1b[34m*  \x1b[0m";
 				}
+				for (size_t i = 0; i < 60; i++) {
+					cout << '/';
+				} // fill the rest of line by /
 			}
 			cout << '\n'; // go to next line
 		}
@@ -196,18 +204,92 @@ void f4PastGlory() {
 	{
 		if (0 == i % 2)
 		{
-			cout << setw(84) << setfill(' ') << '\n';
+			for (size_t i = 0; i < 85; i++) {
+				cout << '/';
+			}
+			cout << endl;
 		}
 		else
 		{
-			cout << setw(84) << setfill('/') << '\n';
+			for (size_t i = 0; i < 85; i++) {
+				cout << "\x1b[31m/\x1b[0m";
+			}
+			cout << endl;
 		}
 	}
+	cout << endl;
 }
 
 void f5SinusoidGraph() {
-	system("\"D:/Microsoft VS source/C++/Home Tasks/1 курс/ДЗ №5 на 6ю неделю/"
-		   "Task 5 (graph)/Debug/Task 5 (graph).exe\""); // path to the file
+	cout << "\nEnter 1, if you want to see window application graph.\n"
+		"Enter 2, if you want to see console graph.\n";
+	int path = initializeNotNegativeInteger();
+	switch (path) {
+	case 1:
+		system("\"D:/Microsoft VS source/C++/Home Tasks/1 курс/ДЗ №5 на 6ю неделю/"
+			"Task 5 (graph)/Debug/Task 5 (graph).exe\""); // path to the file
+		break;
+	case 2: {
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		int height = 20;
+		int width = 190;
+		string array[30][200];
+		for (int y = 0; y < height; ++y) {
+			for (int x = 0; x < width; ++x) {
+				int y = (sin(x * 4 * M_PI / width) + 1) / 2 * height;
+				if ((y >= 0) && (y < height)) {
+					array[y][x] = "*";
+				}
+			}
+		}
+		for (int y = 0; y < height; ++y) {
+			for (int x = 0; x < width - 25; ++x) {
+				if (array[y][x] == "") {
+					if (y == 0 && x == 48) {
+						SetConsoleTextAttribute(hConsole, 240);
+						cout << "^";
+					}
+					else if (y == 9 && x == 164) {
+						SetConsoleTextAttribute(hConsole, 240);
+						cout << ">";
+					}
+					else if (y == 0 && x == 50) {
+						SetConsoleTextAttribute(hConsole, 240);
+						cout << "Y";
+					}
+					else if (y == 8 && x == 164) {
+						SetConsoleTextAttribute(hConsole, 240);
+						cout << "X";
+					}
+					else if (y == 9) {
+						SetConsoleTextAttribute(hConsole, 240);
+						cout << "-";
+					}
+					else if (x == 48) {
+						SetConsoleTextAttribute(hConsole, 240);
+						cout << "|";
+					}
+					else {
+						SetConsoleTextAttribute(hConsole, 240);
+						cout << " ";
+					}
+				}
+				else {
+					SetConsoleTextAttribute(hConsole, 244);
+					cout << array[y][x];
+				}
+			}
+			cout << endl;
+		}
+		SetConsoleTextAttribute(hConsole, 7);
+		cout << endl;
+		break;
+	}
+	default:
+		cout << "\nWrong number entered.Try again\n";
+		break;
+	}
+	
 }
 
 bool isCorrect(string romanNumber) { 
