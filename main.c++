@@ -231,9 +231,9 @@ void f5SinusoidGraph() {
 		break;
 	case 2: {
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-		int height = 20;
-		int width = 190;
-		string array[30][200];
+		int height = 30;
+		int width = 100;
+		string array[30][100];
 		for (int y = 0; y < height; ++y) {
 			for (int x = 0; x < width; ++x) {
 				int y = (sin(x * 4 * M_PI / width) + 1) / 2 * height;
@@ -242,46 +242,37 @@ void f5SinusoidGraph() {
 				}
 			}
 		}
-		for (int y = 0; y < height; ++y) {
-			for (int x = 0; x < width - 25; ++x) {
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
 				if (array[y][x] == "") {
-					if (y == 0 && x == 48) {
-						SetConsoleTextAttribute(hConsole, 240);
+					if (y == 0 && x == 49) {
 						cout << "^";
 					}
-					else if (y == 9 && x == 164) {
-						SetConsoleTextAttribute(hConsole, 240);
+					else if (y == 14 && x == 99) {
 						cout << ">";
 					}
-					else if (y == 0 && x == 50) {
-						SetConsoleTextAttribute(hConsole, 240);
+					else if (y == 0 && x == 51) {
 						cout << "Y";
 					}
-					else if (y == 8 && x == 164) {
-						SetConsoleTextAttribute(hConsole, 240);
+					else if (y == 15 && x == 99) {
 						cout << "X";
 					}
-					else if (y == 9) {
-						SetConsoleTextAttribute(hConsole, 240);
+					else if (y == 14) {
 						cout << "-";
 					}
-					else if (x == 48) {
-						SetConsoleTextAttribute(hConsole, 240);
+					else if (x == 49) {
 						cout << "|";
 					}
 					else {
-						SetConsoleTextAttribute(hConsole, 240);
 						cout << " ";
 					}
 				}
 				else {
-					SetConsoleTextAttribute(hConsole, 244);
 					cout << array[y][x];
 				}
 			}
 			cout << endl;
 		}
-		SetConsoleTextAttribute(hConsole, 7);
 		cout << endl;
 		break;
 	}
@@ -294,15 +285,16 @@ void f5SinusoidGraph() {
 
 bool isCorrect(string romanNumber) { 
 	char romanNumbers[7] = { 'I', 'V', 'X', 'L', 'C', 'D', 'M' };
+	int arabicNumbers[7] = { 1, 5, 10, 50, 100, 500, 1000 };
 	// belonging of the element of the entered number to the roman num alphabet
 	for (size_t i = 0; i < romanNumber.length(); i++) {	
-		bool isromanNumber = false; 
+		bool isRomanNumber = false; 
 		for (size_t j = 0; j < 7; j++) {
 			if (romanNumber[i] == romanNumbers[j]) {
-				isromanNumber = true;
+				isRomanNumber = true;
 			}
 		}
-		if (!isromanNumber) {
+		if (!isRomanNumber) {
 			return false;
 		}
 	}
@@ -318,9 +310,17 @@ bool isCorrect(string romanNumber) {
 	}
 	// check for 2 and more identical numbers less than the next not identical
 	if (romanNumber.length() > 2) {
-		for (size_t i = romanNumber.length(); i != 1; i--)
-		{
-			if (romanNumber[i] > romanNumber[i - 1] &&
+		for (size_t i = romanNumber.length() - 1; i != 1; i--) {
+			int indexOfCurrent, indexOfNext;
+			for (size_t j = 0; j < 7; j++) {
+				if (romanNumber[i] == romanNumbers[j]) {
+					indexOfCurrent = j;
+				}
+				if (romanNumber[i - 1] == romanNumbers[j]) {
+					indexOfNext = j;
+				}
+			}
+			if (arabicNumbers[indexOfCurrent] > arabicNumbers[indexOfNext] &&
 				romanNumber[i - 1] == romanNumber[i - 2]) { // comparing
 				return false;
 			}
