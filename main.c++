@@ -23,9 +23,18 @@ int initializeInteger(string path, int lowerBound, int upperBound) {
 		cin >> temporaryVariableString;
 		isCorrect = true;
 		for (size_t i = 0; i < 128; i++) {
-			if ((i < (int)'0' || i >(int)'9') && i != (int)'-') {
-				if (temporaryVariableString.find((char)i) != string::npos) {
-					isCorrect = false;
+			if (i < (int)'0' || i >(int)'9') {
+				if (i != (int)'-') {
+					if (temporaryVariableString.find((char)i) != string::npos) {
+						isCorrect = false;
+					}
+				}
+				else if (temporaryVariableString.find((char)i) != string::npos) {
+					if ((count(temporaryVariableString.begin(),
+						temporaryVariableString.end(), (char)i) > 1)
+						|| temporaryVariableString.length() == 1) {
+						isCorrect = false;
+					}
 				}
 			}
 		}
@@ -71,10 +80,18 @@ double initializeDouble(string path, double lowerBound, double upperBound) {
 		cin >> temporaryVariableString;
 		isCorrect = true;
 		for (size_t i = 0; i < 128; i++) {
-			if ((i < (int)'0' || i >(int)'9') &&
-				i != (int)'-' && i != (int)'.') {
-				if (temporaryVariableString.find((char)i) != string::npos) {
-					isCorrect = false;
+			if (i < (int)'0' || i >(int)'9') {
+				if (i != (int)'-' && i != (int)'.') {
+					if (temporaryVariableString.find((char)i) != string::npos) {
+						isCorrect = false;
+					}
+				}
+				else if (temporaryVariableString.find((char)i) != string::npos) {
+					if ((count(temporaryVariableString.begin(),
+						temporaryVariableString.end(), (char)i) > 1)
+						|| temporaryVariableString.length() == 1) {
+						isCorrect = false;
+					}
 				}
 			}
 		}
@@ -182,7 +199,7 @@ void f3GeometricFigures() {
 	cout << "\nEnter:\n1, if you need to compute S of rectangle.\n"
 		"2, if you need to compute S of triangle.\n"
 		"3, if you need to compute S of circle.\n";
-	int choise = initializeInteger("all", 1, 3); // choosing figure
+	int choise = initializeInteger("all", 3, 1); // choosing figure
 	switch (choise) {
 	case 1: {
 			cout << "\nEnter the values of the sides of the rectangle:\n";
@@ -427,11 +444,9 @@ void generatePseudoRandomNumber(int path) {
 		c = 65537;
 		cout << "The value of sequence range c: " << c << ".\n";
 	}
-	cout << "\nEnter the number of elements in a sequence maxLen:\n";
-	int maxLen = initializeInteger("positive", 0, 0);
 	cout << endl;
-	for (int i = 0; i < maxLen; i++) { // generation by iteration
-		nS = (m * nS + a) % c;
+	for (int i = 0; i < a; i++) { // generation by iteration
+		nS = (m * nS + i) % c;
 		cout << "Pseudorandom number is: " << nS << ".\n";
 	}
 }
